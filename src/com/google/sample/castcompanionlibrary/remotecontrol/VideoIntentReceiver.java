@@ -68,7 +68,11 @@ public class VideoIntentReceiver extends BroadcastReceiver {
             try {
                 if (null != castMgr) {
                     LOGD(TAG, "Calling stopApplication from intent");
-                    castMgr.disconnect();
+                    //Disconnect isn't enough
+                    //castMgr.disconnect();
+                    
+                    //https://developers.google.com/cast/docs/design_checklist#sender-control-notification
+                    castMgr.stopApplication();
                 } else {
                     startService(context, VideoCastNotificationService.ACTION_STOP);
                 }
